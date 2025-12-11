@@ -11,9 +11,9 @@
         }
     ],
     "require": {
-        "php": "^7.4|^8.0|^8.1|^8.2",
-        "magento/framework": "^102.0|^103.0",
-        "magento/module-theme": "^100.4|^101.0|^101.1"
+        "php": ">=7.4",
+        "magento/framework": ">=102.0",
+        "magento/module-theme": ">=100.4"
     },
     "autoload": {
         "files": [
