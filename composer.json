@@ -1,0 +1,32 @@
+{
+    "name": "kingfisherdirect/magento2-posthog",
+    "description": "PostHog Analytics integration module for Magento 2",
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Jakub Mika",
+            "email": "jakub.mika94@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0|^8.1|^8.2",
+        "magento/framework": "^102.0|^103.0",
+        "magento/module-theme": "^100.4|^101.0|^101.1"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "KingfisherDirect\\Posthog\\": ""
+        }
+    },
+    "keywords": [
+        "magento2",
+        "posthog",
+        "analytics",
+        "tracking"
+    ]
+}
