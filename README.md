@@ -1,32 +1,28 @@
-# KingfisherDirect_Posthog
-
 PostHog Analytics integration module for Magento 2.
 
-## Features
+Features
 
-- Global PostHog analytics integration
-- Admin panel configuration
-- CSP (Content Security Policy) whitelist included
-- Store-level configuration support
-- Easy to configure for multiple sites (KFD, BS, DWT, GB)
+    Global PostHog analytics integration
+    Admin panel configuration
+    CSP (Content Security Policy) whitelist included
+    Store-level configuration support
+    Easy to configure for multiple sites
 
-## Configuration
+Configuration
 
-Navigate to: **Stores > Configuration > General > PostHog**
+Navigate to: Stores > Configuration > General > PostHog
+Settings:
 
-### Settings:
+    Enable PostHog: Yes/No
+    PostHog Project API Key: Your PostHog project API key (e.g., phc_...)
+    API Host: PostHog API host URL (default: https://eu.i.posthog.com)
+    Person Profiles: Choose when to create person profiles:
+        Always
+        Identified Only (default)
+        Never
 
-1. **Enable PostHog**: Yes/No
-2. **PostHog Project API Key**: Your PostHog project API key (e.g., `phc_...`)
-3. **API Host**: PostHog API host URL (default: `https://eu.i.posthog.com`)
-4. **Person Profiles**: Choose when to create person profiles:
-   - Always
-   - Identified Only (default)
-   - Never
+Installation
 
-## Installation
-
-```bash
 # Enable module
 bin/magento module:enable KingfisherDirect_Posthog
 
@@ -35,13 +31,11 @@ bin/magento setup:upgrade
 
 # Flush cache
 bin/magento cache:flush
-```
 
-## CLI Configuration
+CLI Configuration
 
 You can configure PostHog via CLI:
 
-```bash
 # Enable PostHog
 bin/magento config:set posthog/general/enabled 1
 
@@ -56,29 +50,23 @@ bin/magento config:set posthog/general/person_profiles "identified_only"
 
 # Flush cache
 bin/magento cache:flush
-```
 
-## Multi-site Setup
+Multi-site Setup
 
-For different sites (KFD, BS, DWT, GB), you can configure different PostHog projects:
+To configure different PostHog projects per website:
 
-```bash
 # For a specific website
-bin/magento config:set --scope=websites --scope-code=kfd posthog/general/project_api_key "phc_KFD_KEY"
-bin/magento config:set --scope=websites --scope-code=bs posthog/general/project_api_key "phc_BS_KEY"
-bin/magento config:set --scope=websites --scope-code=dwt posthog/general/project_api_key "phc_DWT_KEY"
-bin/magento config:set --scope=websites --scope-code=gb posthog/general/project_api_key "phc_GB_KEY"
-```
+bin/magento config:set --scope=websites --scope-code=example1 posthog/general/project_api_key "phc_KEY_1"
+bin/magento config:set --scope=websites --scope-code=example2 posthog/general/project_api_key "phc_KEY_2"
 
-## How It Works
+How It Works
 
-The module adds PostHog tracking script to all frontend pages via the `default.xml` layout.
+The module adds PostHog tracking script to all frontend pages via the default.xml layout.
 
-The script is injected into the `after.body.start` container for optimal performance.
+The script is injected into the after.body.start container for optimal performance.
 
-## File Structure
+File Structure
 
-```
 KingfisherDirect/Posthog/
 ├── Block/
 │   └── Script.php              # Block class for rendering
@@ -102,8 +90,6 @@ KingfisherDirect/Posthog/
 │       └── templates/
 │           └── script.phtml    # PostHog script template
 └── registration.php            # Module registration
-```
 
-## License
-
-Proprietary - KingfisherDirect
+License
+Proprietary
