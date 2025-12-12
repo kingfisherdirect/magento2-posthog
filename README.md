@@ -1,28 +1,34 @@
+# KingfisherDirect_Posthog
+
 PostHog Analytics integration module for Magento 2.
 
-Features
+## Features
 
-    Global PostHog analytics integration
-    Admin panel configuration
-    CSP (Content Security Policy) whitelist included
-    Store-level configuration support
-    Easy to configure for multiple sites
+* Global PostHog analytics integration
+* Admin panel configuration
+* CSP (Content Security Policy) whitelist included
+* Store-level configuration support
+* Easy to configure for multiple sites
 
-Configuration
+## Configuration
 
-Navigate to: Stores > Configuration > General > PostHog
-Settings:
+Navigate to:
+**Stores > Configuration > General > PostHog**
 
-    Enable PostHog: Yes/No
-    PostHog Project API Key: Your PostHog project API key (e.g., phc_...)
-    API Host: PostHog API host URL (default: https://eu.i.posthog.com)
-    Person Profiles: Choose when to create person profiles:
-        Always
-        Identified Only (default)
-        Never
+### Settings
 
-Installation
+* **Enable PostHog:** Yes/No
+* **PostHog Project API Key:** Your PostHog project API key (e.g., `phc_...`)
+* **API Host:** PostHog API host URL (default: `https://eu.i.posthog.com`)
+* **Person Profiles:** When to create person profiles:
 
+  * Always
+  * Identified Only (default)
+  * Never
+
+## Installation
+
+```
 # Enable module
 bin/magento module:enable KingfisherDirect_Posthog
 
@@ -31,11 +37,13 @@ bin/magento setup:upgrade
 
 # Flush cache
 bin/magento cache:flush
+```
 
-CLI Configuration
+## CLI Configuration
 
 You can configure PostHog via CLI:
 
+```
 # Enable PostHog
 bin/magento config:set posthog/general/enabled 1
 
@@ -50,46 +58,47 @@ bin/magento config:set posthog/general/person_profiles "identified_only"
 
 # Flush cache
 bin/magento cache:flush
+```
 
-Multi-site Setup
+## Multi-site Setup
 
-To configure different PostHog projects per website:
+For different sites, you can configure different PostHog projects:
 
+```
 # For a specific website
-bin/magento config:set --scope=websites --scope-code=example1 posthog/general/project_api_key "phc_KEY_1"
-bin/magento config:set --scope=websites --scope-code=example2 posthog/general/project_api_key "phc_KEY_2"
+bin/magento config:set --scope=websites --scope-code=site1 posthog/general/project_api_key "phc_SITE1_KEY"
+bin/magento config:set --scope=websites --scope-code=site2 posthog/general/project_api_key "phc_SITE2_KEY"
+```
 
-How It Works
+## How It Works
 
-The module adds PostHog tracking script to all frontend pages via the default.xml layout.
+The module adds the PostHog tracking script to all frontend pages via the `default.xml` layout.
+The script is injected into the `after.body.start` container for optimal performance.
 
-The script is injected into the after.body.start container for optimal performance.
+## File Structure
 
-File Structure
-
+```
 KingfisherDirect/Posthog/
 ├── Block/
-│   └── Script.php              # Block class for rendering
+│   └── Script.php                # Block class for rendering
 ├── Helper/
-│   └── Data.php                # Helper for configuration
+│   └── Data.php                  # Helper for configuration
 ├── Model/
 │   └── Config/
 │       └── Source/
-│           └── PersonProfiles.php  # Source model for dropdown
+│           └── PersonProfiles.php # Source model for dropdown
 ├── etc/
-│   ├── acl.xml                 # ACL configuration
+│   ├── acl.xml                   # ACL configuration
 │   ├── adminhtml/
-│   │   └── system.xml          # Admin system configuration
-│   ├── config.xml              # Default configuration values
-│   ├── csp_whitelist.xml       # CSP whitelist
-│   └── module.xml              # Module declaration
+│   │   └── system.xml            # Admin system configuration
+│   ├── config.xml                # Default configuration values
+│   ├── csp_whitelist.xml         # CSP whitelist
+│   └── module.xml                # Module declaration
 ├── view/
 │   └── frontend/
 │       ├── layout/
-│       │   └── default.xml     # Global layout
+│       │   └── default.xml       # Global layout
 │       └── templates/
-│           └── script.phtml    # PostHog script template
-└── registration.php            # Module registration
-
-License
-Proprietary
+│           └── script.phtml      # PostHog script template
+└── registration.php              # Module registration
+```
