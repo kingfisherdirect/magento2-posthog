@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="order.success.additional.info">
+            <block class="KingfisherDirect\Posthog\Block\PurchaseEvent"
+                   name="posthog.purchase.event"
+                   template="KingfisherDirect_Posthog::purchase.phtml"
+                   cacheable="false"
+                   after="-"/>
+        </referenceContainer>
+    </body>
+</page>

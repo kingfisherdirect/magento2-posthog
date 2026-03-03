@@ -1,0 +1,19 @@
+<?php
+/**
+ * PostHog Purchase Event
+ *
+ * @var \KingfisherDirect\Posthog\Block\PurchaseEvent $block
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+
+$orderData = $block->getOrderData();
+?>
+<?php if (!empty($orderData)): ?>
+<?php
+$orderJson = json_encode($orderData);
+$scriptString = <<<SCRIPT
+posthog.capture("purchase", {$orderJson});
+SCRIPT;
+?>
+<?= $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+<?php endif ?>
