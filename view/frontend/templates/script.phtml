@@ -9,6 +9,7 @@
 $projectApiKey = $block->escapeJs($block->getProjectApiKey());
 $apiHost = $block->escapeJs($block->getApiHost());
 $personProfiles = $block->escapeJs($block->getPersonProfiles());
+$layoutHandle = $block->escapeJs($block->getLayoutHandle());
 ?>
 <?php if ($block->shouldRender()): ?>
 <?php
@@ -19,6 +20,7 @@ posthog.init('{$projectApiKey}', {
     api_host: '{$apiHost}',
     person_profiles: '{$personProfiles}'
 });
+posthog.register({ layout_handle: '{$layoutHandle}' });
 SCRIPT;
 
 $customerData = $block->getCustomerData();

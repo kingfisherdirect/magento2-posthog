@@ -80,6 +80,16 @@ class Script extends Template
     }
 
     /**
+     * Get current layout handle (e.g. catalog_product_view)
+     *
+     * @return string
+     */
+    public function getLayoutHandle(): string
+    {
+        return $this->getRequest()->getFullActionName();
+    }
+
+    /**
      * Get logged-in customer data for identify call, or empty array if guest
      *
      * @return array
