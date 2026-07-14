@@ -79,6 +79,11 @@ class Script extends Template
         return $this->posthogHelper->getPersonProfiles();
     }
 
+    public function getStoreCurrencyCode(): string
+    {
+        return $this->_storeManager->getStore()->getCurrentCurrencyCode();
+    }
+
     /**
      * Get current layout handle (e.g. catalog_product_view)
      *

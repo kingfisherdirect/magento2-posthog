@@ -23,6 +23,9 @@ posthog.init('{$projectApiKey}', {
 posthog.register({ layout_handle: '{$layoutHandle}' });
 SCRIPT;
 
+$currency = $block->escapeJs($block->getStoreCurrencyCode());
+$scriptString .= "window.posthogConfig={currency:'{$currency}'};";
+
 $customerData = $block->getCustomerData();
 if (!empty($customerData)) {
     $customerId    = $block->escapeJs($customerData['id']);

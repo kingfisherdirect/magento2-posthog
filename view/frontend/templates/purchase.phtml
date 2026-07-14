@@ -7,12 +7,14 @@
  */
 
 $orderData = $block->getOrderData();
+if (!empty($orderData)) {
+    $orderJson = json_encode($orderData, JSON_HEX_TAG | JSON_HEX_AMP);
+}
 ?>
-<?php if (!empty($orderData)): ?>
+<?php if (!empty($orderData) && $orderJson !== false): ?>
 <?php
-$orderJson = json_encode($orderData);
 $scriptString = <<<SCRIPT
-posthog.capture("purchase", {$orderJson});
+if (typeof posthog !== 'undefined') { posthog.capture("purchase", {$orderJson}); }
 SCRIPT;
 ?>
 <?= $secureRenderer->renderTag('script', [], $scriptString, false) ?>
