@@ -1,0 +1,19 @@
+<?php
+/**
+ * PostHog product attribute registration on product pages
+ *
+ * @var \KingfisherDirect\Posthog\Block\ProductPageCategories $block
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+
+$properties = $block->getProperties();
+?>
+<?php
+    $jsonData = json_encode($properties, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+    $scriptString = <<<SCRIPT
+if (typeof posthog !== "undefined") {
+    posthog.register({$jsonData});
+}
+    SCRIPT;
+?>
+<?= $secureRenderer->renderTag('script', [], $scriptString, false) ?>

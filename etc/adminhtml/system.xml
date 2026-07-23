@@ -35,6 +35,15 @@
                     </depends>
                 </field>
             </group>
+            <group id="product_attributes" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Attribute Tracking</label>
+                <field id="attributes" translate="label comment" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Tracked Attributes</label>
+                    <comment>Configure which product attributes to send to PostHog on product pages and/or purchase events.</comment>
+                    <frontend_model>KingfisherDirect\Posthog\Block\Adminhtml\System\Config\ProductAttributes</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
         </section>
     </system>
 </config>
