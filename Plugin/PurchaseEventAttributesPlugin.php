@@ -9,7 +9,7 @@ use KingfisherDirect\Posthog\Model\ProductAttributesConfig;
 use Magento\Catalog\Model\Product;
 use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
 use Magento\ConfigurableProduct\Model\ResourceModel\Product\Type\Configurable as ConfigurableType;
-use Magento\ConfigurableProduct\Model\ResourceModel\Product\Type\Configurable\OptionProvider;
+use Magento\ConfigurableProduct\Model\ResourceModel\Attribute\OptionProvider;
 use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
 
