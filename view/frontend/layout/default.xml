@@ -6,6 +6,10 @@
                    name="posthog.script"
                    template="KingfisherDirect_Posthog::script.phtml"
                    after="-"/>
+            <block class="KingfisherDirect\Posthog\Block\ProductProperties"
+                   name="posthog.product.properties"
+                   template="KingfisherDirect_Posthog::product_properties.phtml"
+                   after="posthog.script"/>
         </referenceContainer>
     </body>
 </page>

@@ -75,15 +75,7 @@ class PurchaseEventAttributesPlugin
                 continue;
             }
             $parent = $parentsBySku[$item['sku']] ?? null;
-            foreach ($attributeCodes as $attributeCode) {
-                $value = $this->attributeValueResolver->resolve($product, $attributeCode);
-                if ($value === null && $parent !== null) {
-                    $value = $this->attributeValueResolver->resolve($parent, $attributeCode);
-                }
-                if ($value !== null) {
-                    $item['product_' . $attributeCode] = $value;
-                }
-            }
+            $item += $this->attributeValueResolver->resolveProperties($product, $attributeCodes, $parent);
         }
         unset($item);
 
