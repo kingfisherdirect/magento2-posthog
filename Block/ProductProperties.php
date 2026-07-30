@@ -8,8 +8,10 @@ use KingfisherDirect\Posthog\Model\ProductAttributesConfig;
 use Magento\Framework\Registry;
 use Magento\Framework\View\Element\Template\Context;
 
-class ProductPageCategories extends AbstractPosthogBlock
+class ProductProperties extends AbstractPosthogBlock
 {
+    private ?array $attributeCodes = null;
+
     public function __construct(
         Context $context,
         private Registry $registry,
@@ -21,21 +23,26 @@ class ProductPageCategories extends AbstractPosthogBlock
         parent::__construct($context, $posthogHelper, $data);
     }
 
-    public function getProperties(): array
+    public function getPropertyKeys(): array
+    {
+        return array_map(
+            static fn (string $attributeCode): string => 'product_' . $attributeCode,
+            $this->getAttributeCodes()
+        );
+    }
+
+    public function getPropertiesToRegister(): array
     {
         $product = $this->registry->registry('product');
         if (!$product) {
             return [];
         }
 
-        $properties = [];
-        foreach ($this->attributesConfig->getAttributesForProductPage() as $attributeCode) {
-            $value = $this->attributeValueResolver->resolve($product, $attributeCode);
-            if ($value !== null) {
-                $properties['product_' . $attributeCode] = $value;
-            }
-        }
+        return $this->attributeValueResolver->resolveProperties($product, $this->getAttributeCodes());
+    }
 
-        return $properties;
+    private function getAttributeCodes(): array
+    {
+        return $this->attributeCodes ??= $this->attributesConfig->getAttributesForProductPage();
     }
 }

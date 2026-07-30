@@ -42,4 +42,25 @@ class AttributeValueResolver
 
         return $value;
     }
+
+    /**
+     * Resolve a set of attributes into a 'product_' + code => value map, skipping
+     * attributes with no meaningful value. Falls back to $fallback (e.g. a
+     * configurable parent) when $product itself has no value for an attribute.
+     */
+    public function resolveProperties(Product $product, array $attributeCodes, ?Product $fallback = null): array
+    {
+        $properties = [];
+        foreach ($attributeCodes as $attributeCode) {
+            $value = $this->resolve($product, $attributeCode);
+            if ($value === null && $fallback !== null) {
+                $value = $this->resolve($fallback, $attributeCode);
+            }
+            if ($value !== null) {
+                $properties['product_' . $attributeCode] = $value;
+            }
+        }
+
+        return $properties;
+    }
 }
