@@ -8,7 +8,8 @@ define(['jquery', 'Magento_Customer/js/customer-data'], function ($, customerDat
 
         var formData = new FormData(data.form[0]);
         var qty = Number(formData.get('qty')) || undefined;
-        var productId = data.productIds && data.productIds[0];
+        // on product pages productIds starts with the viewed product, also for other add to basket forms there
+        var productId = formData.get('product') || data.productIds && data.productIds[0];
         var relatedIds = String(formData.get('related_product') || '').split(',').filter(Boolean);
 
         function capture(cart, id, properties) {
